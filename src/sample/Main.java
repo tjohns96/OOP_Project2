@@ -23,6 +23,8 @@ public class Main extends Application {
     System.out.println(iPodShuffle.toString());
     iPodShuffle.play();
     iPodShuffle.stop();
+    Screen screen = new Screen("1080p", 144, 3);
+    System.out.println(screen.toString());
     launch(args);
   }
 }
