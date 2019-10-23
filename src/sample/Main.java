@@ -20,7 +20,6 @@ public class Main extends Application {
 
   public static void main(String[] args) throws SQLException {
     AudioPlayer iPodShuffle = new AudioPlayer("iPod Shuffle", "Apple", "mp3");
-    iPodShuffle.setType("Audio");
     System.out.println(iPodShuffle.toString());
     iPodShuffle.play();
     iPodShuffle.stop();

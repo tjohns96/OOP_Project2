@@ -9,6 +9,7 @@ public class AudioPlayer extends Product implements MultimediaControl {
     super.setManufacturer(newManufacturer);
     this.audioSpecification = audioSpecification;
     mediaType = ItemType.AUDIO;
+    super.setType("Audio");
   }
 
   @Override
