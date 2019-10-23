@@ -25,6 +25,8 @@ public class Main extends Application {
     iPodShuffle.stop();
     Screen screen = new Screen("1080p", 144, 3);
     System.out.println(screen.toString());
+    MoviePlayer moviePlayer = new MoviePlayer("1440p", 60, 2, MonitorType.LED);
+    System.out.println(moviePlayer.toString());
     launch(args);
   }
 }
