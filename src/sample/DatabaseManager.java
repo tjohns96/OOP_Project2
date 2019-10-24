@@ -35,13 +35,14 @@ public class DatabaseManager {
     stmt.executeUpdate();
   }
 
-  public void insertProduction(String iQuery, String[] insertValues) throws SQLException, ParseException {
+  public void insertProduction(String iQuery, String[] insertValues) throws SQLException {
     PreparedStatement stmt = con.prepareStatement(iQuery);
     java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
     stmt.setInt(1, parseInt(insertValues[0]));
     stmt.setTimestamp(2, currentTimestamp);
     stmt.setInt(3, parseInt(insertValues[1]));
     stmt.setInt(4, parseInt(insertValues[2]));
+    stmt.setInt(5, parseInt(insertValues[3]));
     stmt.executeUpdate();
   }
 
@@ -61,6 +62,19 @@ public class DatabaseManager {
     } catch (SQLException e) {
       sqlExceptionHandler(e);
     }
+  }
+
+  public int selectProductionID() {
+    ResultSet rs = null;
+
+    try {
+      Statement stmt = con.createStatement();
+      rs = stmt.executeQuery("SELECT MAX(productionID) FROM production;");
+      return rs.getInt(1);
+    } catch (SQLException e) {
+      sqlExceptionHandler(e);
+    }
+    return -99;
   }
 
   public void closeCon() {

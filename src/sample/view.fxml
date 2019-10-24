@@ -21,14 +21,17 @@ This is my fxml file. It was built using SceneBuilder
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
             <Text layoutX="21.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tab 1" wrappingWidth="44.203125" />
+            <TextField layoutX="217.0" layoutY="135.0" prefHeight="39.0" prefWidth="152.0" />
          </children>
         </AnchorPane>
     </Tab>
-    <Tab text="Catalogue">
+    <Tab text="Production">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
             <Text layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tab 2" wrappingWidth="47.203125" />
             <ComboBox fx:id="typeComboBox" layoutX="31.0" layoutY="44.0" prefWidth="150.0" promptText="Product" />
+            <TextField layoutX="30.0" layoutY="127.0" />
+            <Text layoutX="60.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Made" wrappingWidth="96.98307228088379" />
          </children>
         </AnchorPane>
     </Tab>

@@ -21,8 +21,8 @@ public class Main extends Application {
 
   public static void main(String[] args) throws SQLException, ParseException {
     DatabaseManager db = new DatabaseManager();
-    String[] insertInfo = {"2","2","2"};
-    db.insertProduction("INSERT INTO production VALUES(?,?,?,?)", insertInfo);
+    Production product = new Production();
+    product.insertProduction("15","2");
     db.closeCon();
     launch(args);
   }
