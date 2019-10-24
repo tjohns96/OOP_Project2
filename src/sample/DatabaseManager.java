@@ -1,6 +1,12 @@
 package sample;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import static java.lang.Integer.parseInt;
 
 public class DatabaseManager {
 
@@ -14,11 +20,31 @@ public class DatabaseManager {
 
   public void insertEmployee(String iQuery, String[] insertValues) throws SQLException {
     PreparedStatement stmt = con.prepareStatement(iQuery);
-    stmt.setInt(1, Integer.parseInt(insertValues[0]));
+    stmt.setInt(1, parseInt(insertValues[0]));
     stmt.setString(2, insertValues[1]);
-    stmt.setInt(3,Integer.parseInt(insertValues[2]));
+    stmt.setString(3, insertValues[2]);
     stmt.executeUpdate();
   }
+
+  public void insertProduct(String iQuery, String[] insertValues) throws SQLException {
+    PreparedStatement stmt = con.prepareStatement(iQuery);
+    stmt.setInt(1, parseInt(insertValues[0]));
+    stmt.setString(2, insertValues[1]);
+    stmt.setString(3, insertValues[2]);
+    stmt.setString(4, insertValues[3]);
+    stmt.executeUpdate();
+  }
+
+  public void insertProduction(String iQuery, String[] insertValues) throws SQLException, ParseException {
+    PreparedStatement stmt = con.prepareStatement(iQuery);
+    java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+    stmt.setInt(1, parseInt(insertValues[0]));
+    stmt.setTimestamp(2, currentTimestamp);
+    stmt.setInt(3, parseInt(insertValues[1]));
+    stmt.setInt(4, parseInt(insertValues[2]));
+    stmt.executeUpdate();
+  }
+
 
   public void selectAll() {
     ResultSet rs = null;

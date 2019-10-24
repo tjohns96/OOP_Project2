@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public class Main extends Application {
 
@@ -18,15 +19,11 @@ public class Main extends Application {
     stage.show(); // Making the GUI appear
   }
 
-  public static void main(String[] args) throws SQLException {
-    AudioPlayer iPodShuffle = new AudioPlayer("iPod Shuffle", "Apple", "mp3");
-    System.out.println(iPodShuffle.toString());
-    iPodShuffle.play();
-    iPodShuffle.stop();
-    Screen screen = new Screen("1080p", 144, 3);
-    System.out.println(screen.toString());
-    MoviePlayer moviePlayer = new MoviePlayer("1440p", 60, 2, MonitorType.LED);
-    System.out.println(moviePlayer.toString());
+  public static void main(String[] args) throws SQLException, ParseException {
+    DatabaseManager db = new DatabaseManager();
+    String[] insertInfo = {"2","2","2"};
+    db.insertProduction("INSERT INTO production VALUES(?,?,?,?)", insertInfo);
+    db.closeCon();
     launch(args);
   }
 }
