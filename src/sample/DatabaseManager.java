@@ -13,9 +13,7 @@ public class DatabaseManager {
   private Connection con = null;
 
   public DatabaseManager() throws SQLException {
-    con =
-        DriverManager.getConnection(
-            "jdbc:h2:./res/ProductDB");
+    con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
   }
 
   public void insertEmployee(String iQuery, String[] insertValues) throws SQLException {
@@ -37,7 +35,8 @@ public class DatabaseManager {
 
   public void insertProduction(String iQuery, String[] insertValues) throws SQLException {
     PreparedStatement stmt = con.prepareStatement(iQuery);
-    java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+    java.sql.Timestamp currentTimestamp =
+        new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
     stmt.setInt(1, parseInt(insertValues[0]));
     stmt.setTimestamp(2, currentTimestamp);
     stmt.setInt(3, parseInt(insertValues[1]));
@@ -47,34 +46,37 @@ public class DatabaseManager {
   }
 
 
-  public void selectAll() {
-    ResultSet rs = null;
-
-    try {
-      Statement stmt = con.createStatement();
-      rs = stmt.executeQuery("SELECT * FROM employee;");
-
-      while (rs.next()) {
-        System.out.printf("uID = %d%n", rs.getInt("uid"));
-        System.out.printf("Name = %s%n", rs.getString("name"));
-      }
-
-    } catch (SQLException e) {
-      sqlExceptionHandler(e);
-    }
-  }
-
   public int selectProductionID() {
     ResultSet rs = null;
-
     try {
       Statement stmt = con.createStatement();
       rs = stmt.executeQuery("SELECT MAX(productionID) FROM production;");
-      return rs.getInt(1);
+      rs.next();
+      int result = rs.getInt(1);
+      return result;
     } catch (SQLException e) {
       sqlExceptionHandler(e);
+      return -99;
     }
-    return -99;
+  }
+
+  public int selectTotalMade(String product, int madeNow) {
+    ResultSet rs = null;
+
+    try {
+      Statement stmt = con.createStatement();
+      rs = stmt.executeQuery("SELECT id FROM product WHERE NAME = '" + product + "';");
+      rs.next();
+      int productID = rs.getInt(1);
+      rs = stmt.executeQuery("SELECT MAX(totalMade) FROM production WHERE PRODUCTID = " + productID + ";");
+      rs.next();
+      int totalMade = rs.getInt(1);
+      totalMade += madeNow;
+      return totalMade;
+    } catch (SQLException e) {
+      sqlExceptionHandler(e);
+      return 0;
+    }
   }
 
   public void closeCon() {

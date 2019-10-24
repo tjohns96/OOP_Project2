@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 
 public class Main extends Application {
 
@@ -19,10 +18,11 @@ public class Main extends Application {
     stage.show(); // Making the GUI appear
   }
 
-  public static void main(String[] args) throws SQLException, ParseException {
+  public static void main(String[] args) throws SQLException {
     DatabaseManager db = new DatabaseManager();
     Production product = new Production();
-    product.insertProduction("15","2");
+    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)));
+    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)));
     db.closeCon();
     launch(args);
   }
