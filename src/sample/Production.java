@@ -10,7 +10,7 @@ public class Production {
     public Production() throws SQLException{
     }
 
-    public void insertProduction(String nextID, String amountMade, String totalMade) throws SQLException {
+    public void insertProduction(String nextID, String amountMade, String totalMade, String productID) throws SQLException {
       if(nextID.equals("-99")){
         nextID = "1";
       }
@@ -18,7 +18,7 @@ public class Production {
         int newID = Integer.parseInt(nextID)+1;
         nextID = Integer.toString(newID);
       }
-      String[] insertInfo = {nextID, amountMade, totalMade, "1"};
+      String[] insertInfo = {nextID, amountMade, totalMade, productID};
     db.insertProduction("INSERT INTO production VALUES(?,?,?,?,?)", insertInfo);
   }
 }

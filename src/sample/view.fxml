@@ -28,17 +28,22 @@ This is my fxml file. It was built using SceneBuilder
     <Tab text="Production">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <Text layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tab 2" wrappingWidth="47.203125" />
-            <ComboBox fx:id="typeComboBox" layoutX="31.0" layoutY="44.0" prefWidth="150.0" promptText="Product" />
-            <TextField layoutX="30.0" layoutY="127.0" />
-            <Text layoutX="60.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Made" wrappingWidth="96.98307228088379" />
+            <Text layoutX="30.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Record Production" wrappingWidth="203.203125">
+               <font>
+                  <Font size="20.0" />
+               </font></Text>
+            <TextField fx:id="prodAmount" layoutX="30.0" layoutY="96.0" />
+            <Text layoutX="58.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Made" wrappingWidth="96.98307228088379" />
+            <ComboBox fx:id="productComboBox" layoutX="233.0" layoutY="95.0" prefWidth="150.0" promptText="Product Made" />
+            <Button fx:id="recordButton" layoutX="77.0" layoutY="191.0" mnemonicParsing="false" onAction="#recordButtonPress" text="Record" />
          </children>
         </AnchorPane>
     </Tab>
     <Tab text="Manager">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <Text layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tab 3" wrappingWidth="85.13671875" />
+            <Text layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product" wrappingWidth="85.13671875" />
+            <ComboBox fx:id="typeComboBox" layoutX="20.0" layoutY="43.0" prefWidth="150.0" promptText="Product Type" />
          </children>
         </AnchorPane>
     </Tab>

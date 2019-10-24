@@ -46,6 +46,7 @@ public class DatabaseManager {
   }
 
 
+
   public int selectProductionID() {
     ResultSet rs = null;
     try {
@@ -73,6 +74,21 @@ public class DatabaseManager {
       int totalMade = rs.getInt(1);
       totalMade += madeNow;
       return totalMade;
+    } catch (SQLException e) {
+      sqlExceptionHandler(e);
+      return 0;
+    }
+  }
+
+  public int selectProductID(String product) {
+    ResultSet rs = null;
+
+    try {
+      Statement stmt = con.createStatement();
+      rs = stmt.executeQuery("SELECT id FROM product WHERE NAME = '" + product + "';");
+      rs.next();
+      int productID = rs.getInt(1);
+      return productID;
     } catch (SQLException e) {
       sqlExceptionHandler(e);
       return 0;

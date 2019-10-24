@@ -21,8 +21,8 @@ public class Main extends Application {
   public static void main(String[] args) throws SQLException {
     DatabaseManager db = new DatabaseManager();
     Production product = new Production();
-    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)));
-    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)));
+    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)),Integer.toString(db.selectProductID("DiskMan")));
+    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)),Integer.toString(db.selectProductID("DiskMan")));
     db.closeCon();
     launch(args);
   }
