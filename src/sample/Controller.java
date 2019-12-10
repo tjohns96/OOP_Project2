@@ -18,6 +18,12 @@ public class Controller implements Initializable {
   @FXML private Button buttonLogin;
   @FXML private TextField textFieldUserName;
   @FXML private TextField textFieldPassword;
+  @FXML private TextArea loginResult;
+
+  private int currentUser;
+  private boolean manager = false;
+  private boolean loggedIn = false;
+
 
   public Controller() throws SQLException {
     con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
@@ -46,8 +52,17 @@ public class Controller implements Initializable {
     setTypeComboBox();
   }
   @FXML
-  public void handleLogin(){
+  public void handleLogin() throws SQLException {
     String userName = textFieldUserName.getText();
     String password = textFieldPassword.getText();
+    if(db.checkCredentials(userName, password)){
+      loggedIn = true;
+      loginResult.setText("Logged in!");
+      currentUser = db.setCurrentUser(userName);
+      manager = db.checkManager(currentUser);
+    }
+    else{
+      loginResult.setText("Username or password incorrect");
+    }
   }
 }

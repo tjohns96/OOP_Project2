@@ -14,9 +14,7 @@ public class DatabaseManager {
   private ResultSet rs = null;
 
   public DatabaseManager() throws SQLException {
-    con =
-        DriverManager.getConnection(
-            "jdbc:h2:./res/ProductDB");
+    con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
   }
 
   public void insertEmployee(String iQuery, String[] insertValues) throws SQLException {
@@ -40,39 +38,25 @@ public class DatabaseManager {
     PreparedStatement stmt = con.prepareStatement(iQuery);
     java.sql.Timestamp currentTimestamp =
         new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-    stmt.setInt(1, parseInt(insertValues[0]));
-    stmt.setTimestamp(2, currentTimestamp);
+    stmt.setTimestamp(1, currentTimestamp);
+    stmt.setInt(2, parseInt(insertValues[0]));
     stmt.setInt(3, parseInt(insertValues[1]));
     stmt.setInt(4, parseInt(insertValues[2]));
-    stmt.setInt(5, parseInt(insertValues[3]));
     stmt.executeUpdate();
   }
 
 
-
-  public int selectProductionID() {
-    ResultSet rs = null;
-    try {
-      Statement stmt = con.createStatement();
-      rs = stmt.executeQuery("SELECT MAX(productionID) FROM production;");
-      rs.next();
-      int result = rs.getInt(1);
-      return result;
-    } catch (SQLException e) {
-      sqlExceptionHandler(e);
-      return -99;
-    }
-  }
-
   public int selectTotalMade(String product, int madeNow) {
 
-
     try {
-      Statement stmt = con.createStatement();
-      rs = stmt.executeQuery("SELECT id FROM product WHERE NAME = '" + product + "';");
+      PreparedStatement stmt = con.prepareStatement("SELECT id FROM product WHERE NAME = ?");
+      stmt.setString(1, product);
+      rs = stmt.executeQuery();
       rs.next();
       int productID = rs.getInt(1);
-      rs = stmt.executeQuery("SELECT MAX(totalMade) FROM production WHERE PRODUCTID = " + productID + ";");
+      PreparedStatement stmt2 = con.prepareStatement("SELECT MAX(TOTALMADE) FROM PRODUCTION WHERE PRODUCTID = ?");
+      stmt2.setInt(1,productID);
+      rs = stmt2.executeQuery();
       rs.next();
       int totalMade = rs.getInt(1);
       totalMade += madeNow;
@@ -82,19 +66,22 @@ public class DatabaseManager {
       return 0;
     }
   }
+
   public boolean checkManager(int currentUser) throws SQLException {
     sqlStatement = "SELECT MANAGER FROM employee WHERE id = ?";
     PreparedStatement statement = con.prepareStatement(sqlStatement);
-    statement.setInt(1,currentUser);
+    statement.setInt(1, currentUser);
     rs = statement.executeQuery();
     rs.next();
     boolean result = rs.getBoolean(1);
     return result;
   }
+
   public int selectProductID(String product) {
     try {
-      Statement stmt = con.createStatement();
-      rs = stmt.executeQuery("SELECT id FROM product WHERE NAME = '" + product + "';");
+      PreparedStatement stmt =
+          con.prepareStatement("SELECT id FROM product WHERE NAME = '" + product + "';");
+      rs = stmt.executeQuery();
       rs.next();
       int productID = rs.getInt(1);
       return productID;
@@ -102,6 +89,28 @@ public class DatabaseManager {
       sqlExceptionHandler(e);
       return 0;
     }
+  }
+
+  public boolean checkCredentials(String userName, String password) throws SQLException {
+    String query = "SELECT * FROM EMPLOYEE WHERE USERNAME = ? AND PASSWORD = ?";
+    PreparedStatement stmt = con.prepareStatement(query);
+    stmt.setString(1, userName);
+    stmt.setString(2, password);
+    rs = stmt.executeQuery();
+    if (rs.next()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public int setCurrentUser(String userName) throws SQLException {
+    String query = "SELECT ID FROM EMPLOYEE WHERE USERNAME = ?";
+    PreparedStatement stmt = con.prepareStatement(query);
+    stmt.setString(1, userName);
+    rs = stmt.executeQuery();
+    rs.next();
+    return rs.getInt(1);
   }
 
   public void closeCon() {

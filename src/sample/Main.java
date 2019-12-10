@@ -27,8 +27,8 @@ public class Main extends Application {
     System.out.println(moviePlayer.toString());
     System.out.println( db.checkManager(1));
     launch(args);
-    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)),Integer.toString(db.selectProductID("DiskMan")));
-    product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)),Integer.toString(db.selectProductID("DiskMan")));
+    product.insertProduction("2",Integer.toString(db.selectTotalMade("WalkMan", 2)),Integer.toString(db.selectProductID("WalkMan")));
+    product.insertProduction("2",Integer.toString(db.selectTotalMade("WalkMan", 2)),Integer.toString(db.selectProductID("WalkMan")));
     db.closeCon();
   }
 }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -23,12 +25,13 @@ This is my fxml file. It was built using SceneBuilder
                 <children>
                     <TextField fx:id="textFieldUserName" layoutX="226.0" layoutY="138.0" promptText="Username" />
                     <TextField fx:id="textFieldPassword" layoutX="226.0" layoutY="196.0" promptText="Password" />
-                    <Button fx:id="buttonLogin" layoutX="274.0" layoutY="265.0" mnemonicParsing="false" text="Login" />
+                    <Button fx:id="buttonLogin" layoutX="274.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
                     <Text layoutX="220.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Screen">
                         <font>
                             <Font size="27.0" />
                         </font>
                     </Text>
+               <TextArea fx:id="loginResult" editable="false" layoutX="201.0" layoutY="312.0" prefHeight="0.0" prefWidth="200.0" />
                 </children>
             </AnchorPane>
         </content>
@@ -36,8 +39,14 @@ This is my fxml file. It was built using SceneBuilder
     <Tab text="Add Employee">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
-                <Text layoutX="43.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Employee" wrappingWidth="129.203125" />
-                <TextField layoutX="43.0" layoutY="77.0" prefHeight="39.0" prefWidth="152.0" />
+                <TextField fx:id="textFieldFirstName" layoutX="78.0" layoutY="81.0" prefHeight="25.0" prefWidth="152.0" promptText="Employee First Name" />
+            <TextField fx:id="textFieldLastName" layoutX="80.0" layoutY="143.0" promptText="Employee Last Name" />
+            <TextField fx:id="textFieldUserName" layoutX="80.0" layoutY="207.0" promptText="Username" />
+            <TextField fx:id="textFieldPassword" layoutX="80.0" layoutY="282.0" promptText="Password" />
+            <CheckBox layoutX="457.0" layoutY="190.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Manager" />
+            <Button layoutX="461.0" layoutY="233.0" mnemonicParsing="false" text="Add" />
+            <TextArea editable="false" layoutX="242.0" layoutY="201.0" prefHeight="38.0" prefWidth="166.0" text="Username must be unique" />
+            <TextArea editable="false" layoutX="233.0" layoutY="276.0" prefHeight="38.0" prefWidth="184.0" text="Password must be 4 characters" />
             </children>
         </AnchorPane>
     </Tab>
@@ -56,7 +65,7 @@ This is my fxml file. It was built using SceneBuilder
             </children>
         </AnchorPane>
     </Tab>
-    <Tab text="Manager">
+    <Tab text="Add Product">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
                 <Text layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product" wrappingWidth="85.13671875" />
