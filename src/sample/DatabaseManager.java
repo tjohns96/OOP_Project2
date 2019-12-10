@@ -19,9 +19,11 @@ public class DatabaseManager {
 
   public void insertEmployee(String iQuery, String[] insertValues) throws SQLException {
     PreparedStatement stmt = con.prepareStatement(iQuery);
-    stmt.setInt(1, parseInt(insertValues[0]));
+    stmt.setString(1, insertValues[0]);
     stmt.setString(2, insertValues[1]);
-    stmt.setString(3, insertValues[2]);
+    stmt.setInt(3, parseInt(insertValues[2]));
+    stmt.setString(4,insertValues[3]);
+    stmt.setString(5,insertValues[4]);
     stmt.executeUpdate();
   }
 
@@ -65,6 +67,14 @@ public class DatabaseManager {
       sqlExceptionHandler(e);
       return 0;
     }
+  }
+  public boolean checkUserName(String newUserName) throws SQLException {
+    sqlStatement = "SELECT USERNAME FROM employee WHERE USERNAME = ?";
+    PreparedStatement statement = con.prepareStatement(sqlStatement);
+    statement.setString(1, newUserName);
+    rs = statement.executeQuery();
+     boolean result = rs.next();
+     return result;
   }
 
   public boolean checkManager(int currentUser) throws SQLException {

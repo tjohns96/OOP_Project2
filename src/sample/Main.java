@@ -26,9 +26,8 @@ public class Main extends Application {
     MoviePlayer moviePlayer = new MoviePlayer("1440p", 60, 2, MonitorType.LED);
     System.out.println(moviePlayer.toString());
     System.out.println( db.checkManager(1));
+    EmployeeInfo eInfo = new EmployeeInfo();
     launch(args);
-    product.insertProduction("2",Integer.toString(db.selectTotalMade("WalkMan", 2)),Integer.toString(db.selectProductID("WalkMan")));
-    product.insertProduction("2",Integer.toString(db.selectTotalMade("WalkMan", 2)),Integer.toString(db.selectProductID("WalkMan")));
     db.closeCon();
   }
 }

@@ -25,13 +25,14 @@ This is my fxml file. It was built using SceneBuilder
                 <children>
                     <TextField fx:id="textFieldUserName" layoutX="226.0" layoutY="138.0" promptText="Username" />
                     <TextField fx:id="textFieldPassword" layoutX="226.0" layoutY="196.0" promptText="Password" />
-                    <Button fx:id="buttonLogin" layoutX="274.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
-                    <Text layoutX="220.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Screen">
+                    <Button fx:id="buttonLogin" layoutX="226.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
+                    <Text layoutX="224.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Screen">
                         <font>
                             <Font size="27.0" />
                         </font>
                     </Text>
                <TextArea fx:id="loginResult" editable="false" layoutX="201.0" layoutY="312.0" prefHeight="0.0" prefWidth="200.0" />
+               <Button layoutX="323.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                 </children>
             </AnchorPane>
         </content>
@@ -41,12 +42,11 @@ This is my fxml file. It was built using SceneBuilder
             <children>
                 <TextField fx:id="textFieldFirstName" layoutX="78.0" layoutY="81.0" prefHeight="25.0" prefWidth="152.0" promptText="Employee First Name" />
             <TextField fx:id="textFieldLastName" layoutX="80.0" layoutY="143.0" promptText="Employee Last Name" />
-            <TextField fx:id="textFieldUserName" layoutX="80.0" layoutY="207.0" promptText="Username" />
-            <TextField fx:id="textFieldPassword" layoutX="80.0" layoutY="282.0" promptText="Password" />
-            <CheckBox layoutX="457.0" layoutY="190.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Manager" />
-            <Button layoutX="461.0" layoutY="233.0" mnemonicParsing="false" text="Add" />
-            <TextArea editable="false" layoutX="242.0" layoutY="201.0" prefHeight="38.0" prefWidth="166.0" text="Username must be unique" />
-            <TextArea editable="false" layoutX="233.0" layoutY="276.0" prefHeight="38.0" prefWidth="184.0" text="Password must be 4 characters" />
+            <TextField fx:id="textFieldAddPassword" layoutX="80.0" layoutY="207.0" promptText="Password" />
+            <CheckBox fx:id="checkBoxManager" layoutX="457.0" layoutY="190.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Manager" />
+            <Button layoutX="461.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleAddEmployee" text="Add" />
+            <TextArea fx:id="textAreaUserName" editable="false" layoutX="145.0" layoutY="300.0" prefHeight="38.0" prefWidth="311.0" />
+            <TextArea editable="false" layoutX="250.0" layoutY="201.0" prefHeight="38.0" prefWidth="184.0" text="Password must be 4 characters" />
             </children>
         </AnchorPane>
     </Tab>
@@ -62,14 +62,22 @@ This is my fxml file. It was built using SceneBuilder
                 <Text layoutX="58.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Made" wrappingWidth="96.98307228088379" />
                 <ComboBox fx:id="productComboBox" layoutX="233.0" layoutY="95.0" prefWidth="150.0" promptText="Product Made" />
                 <Button fx:id="recordButton" layoutX="77.0" layoutY="191.0" mnemonicParsing="false" onAction="#recordButtonPress" text="Record" />
+            <TextArea fx:id="textAreaProductionResults" editable="false" layoutX="218.0" layoutY="170.0" prefHeight="131.0" prefWidth="262.0" />
             </children>
         </AnchorPane>
     </Tab>
     <Tab text="Add Product">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
-                <Text layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product" wrappingWidth="85.13671875" />
-                <ComboBox fx:id="typeComboBox" layoutX="20.0" layoutY="43.0" prefWidth="150.0" promptText="Product Type" />
+                <Text layoutX="183.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product" textAlignment="CENTER" wrappingWidth="233.13671875">
+               <font>
+                  <Font size="22.0" />
+               </font></Text>
+                <ComboBox fx:id="typeComboBox" layoutX="33.0" layoutY="98.0" prefWidth="150.0" promptText="Product Type" />
+            <TextField fx:id="textFieldManufacturer" layoutX="34.0" layoutY="186.0" promptText="Manufacturer" />
+            <TextField fx:id="textFieldProductName" layoutX="34.0" layoutY="267.0" promptText="Product name" />
+            <Button layoutX="416.0" layoutY="186.0" mnemonicParsing="false" text="Add Product" />
+            <TextArea fx:id="textAreaAddProduct" layoutX="362.0" layoutY="252.0" prefHeight="55.0" prefWidth="191.0" />
             </children>
         </AnchorPane>
     </Tab>
