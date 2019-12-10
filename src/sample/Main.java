@@ -21,9 +21,14 @@ public class Main extends Application {
   public static void main(String[] args) throws SQLException {
     DatabaseManager db = new DatabaseManager();
     Production product = new Production();
+    Screen screen = new Screen("1080p", 144, 3);
+    System.out.println(screen.toString());
+    MoviePlayer moviePlayer = new MoviePlayer("1440p", 60, 2, MonitorType.LED);
+    System.out.println(moviePlayer.toString());
+    System.out.println( db.checkManager(1));
+    launch(args);
     product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)),Integer.toString(db.selectProductID("DiskMan")));
     product.insertProduction(Integer.toString(db.selectProductionID()), "2",Integer.toString(db.selectTotalMade("DiskMan", 2)),Integer.toString(db.selectProductID("DiskMan")));
     db.closeCon();
-    launch(args);
   }
 }

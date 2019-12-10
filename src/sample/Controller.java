@@ -15,6 +15,9 @@ public class Controller implements Initializable {
   @FXML private ComboBox productComboBox;
   @FXML private TextField prodAmount;
   @FXML private Button recordButton;
+  @FXML private Button buttonLogin;
+  @FXML private TextField textFieldUserName;
+  @FXML private TextField textFieldPassword;
 
   public Controller() throws SQLException {
     con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
@@ -41,5 +44,10 @@ public class Controller implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {
     typeComboBox.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
     setTypeComboBox();
+  }
+  @FXML
+  public void handleLogin(){
+    String userName = textFieldUserName.getText();
+    String password = textFieldPassword.getText();
   }
 }

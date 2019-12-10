@@ -9,11 +9,14 @@ import java.util.Calendar;
 import static java.lang.Integer.parseInt;
 
 public class DatabaseManager {
-
+  private String sqlStatement;
   private Connection con = null;
+  private ResultSet rs = null;
 
   public DatabaseManager() throws SQLException {
-    con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
+    con =
+        DriverManager.getConnection(
+            "jdbc:h2:./res/ProductDB");
   }
 
   public void insertEmployee(String iQuery, String[] insertValues) throws SQLException {
@@ -62,7 +65,7 @@ public class DatabaseManager {
   }
 
   public int selectTotalMade(String product, int madeNow) {
-    ResultSet rs = null;
+
 
     try {
       Statement stmt = con.createStatement();
@@ -79,10 +82,16 @@ public class DatabaseManager {
       return 0;
     }
   }
-
+  public boolean checkManager(int currentUser) throws SQLException {
+    sqlStatement = "SELECT MANAGER FROM employee WHERE id = ?";
+    PreparedStatement statement = con.prepareStatement(sqlStatement);
+    statement.setInt(1,currentUser);
+    rs = statement.executeQuery();
+    rs.next();
+    boolean result = rs.getBoolean(1);
+    return result;
+  }
   public int selectProductID(String product) {
-    ResultSet rs = null;
-
     try {
       Statement stmt = con.createStatement();
       rs = stmt.executeQuery("SELECT id FROM product WHERE NAME = '" + product + "';");
