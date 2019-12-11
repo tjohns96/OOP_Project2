@@ -34,11 +34,15 @@ public class Controller implements Initializable {
   @FXML private TextArea textAreaAddProduct;
   @FXML private TextField textFieldSearch;
   @FXML private TableView<ProductionData> tbvProductionInfo;
+  @FXML private ComboBox productComboBox1;
+  @FXML private TextField textFieldDepartment;
+  @FXML private TextArea textAreaTestResults;
 
   private ObservableList<ProductionData> productionList;
   private int currentUser;
   private boolean manager = false;
   private boolean loggedIn = false;
+  private String currentUserName;
 
   public Controller() throws SQLException {
     con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
@@ -48,7 +52,6 @@ public class Controller implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {
     typeComboBox.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
     setTypeComboBox();
-
   }
 
   public void recordButtonPress() throws SQLException {
@@ -78,6 +81,7 @@ public class Controller implements Initializable {
 
       while (rs.next()) {
         productComboBox.getItems().add(rs.getString(1));
+        productComboBox1.getItems().add(rs.getString(1));
       }
 
     } catch (SQLException e) {
@@ -98,6 +102,7 @@ public class Controller implements Initializable {
       textFieldPassword.clear();
       productionList = FXCollections.observableArrayList(db.getProductionInfo());
       tbvProductionInfo.setItems(productionList);
+      currentUserName = userName;
     } else {
       loginResult.setText("Username or password incorrect");
     }
@@ -119,8 +124,21 @@ public class Controller implements Initializable {
       typeComboBox.getSelectionModel().clearSelection();
       textAreaAddProduct.setText("Product Added!");
       productComboBox.getItems().add(name);
+      productComboBox1.getItems().add(name);
     } else {
       textAreaAddProduct.setText("Must be logged in as a manager to add products.");
+    }
+  }
+  @FXML
+  public void handleTest() throws SQLException {
+    if(loggedIn == true){
+    String productName = productComboBox1.getValue().toString();
+    db.insertTest(productName, currentUserName);
+    textAreaTestResults.setText("Test Recorded!");
+    productComboBox1.getSelectionModel().clearSelection();
+    }
+    else{
+      textAreaTestResults.setText("You need to be logged in to record testing.");
     }
   }
 
@@ -130,6 +148,7 @@ public class Controller implements Initializable {
       String fName = textFieldFirstName.getText().trim();
       String lName = textFieldLastName.getText().trim();
       String password = textFieldAddPassword.getText();
+      String department = textFieldDepartment.getText();
       String userName = eInfo.createUserName(fName.toLowerCase(), lName.toLowerCase());
       int isManager;
       if (checkBoxManager.isSelected()) {
@@ -138,8 +157,8 @@ public class Controller implements Initializable {
         isManager = 0;
       }
       String sql =
-          "INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,MANAGER,USERNAME,PASSWORD) VALUES (?,?,?,?,?)";
-      String[] insert = {fName, lName, Integer.toString(isManager), userName, password};
+          "INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,MANAGER,USERNAME,PASSWORD,DEPTID) VALUES (?,?,?,?,?,?)";
+      String[] insert = {fName, lName, Integer.toString(isManager), userName, password,department};
       db.insertEmployee(sql, insert);
       textFieldAddPassword.clear();
       textFieldFirstName.clear();
@@ -155,6 +174,7 @@ public class Controller implements Initializable {
     }
   }
   public void handleSearch(){
+    if(loggedIn == true){
     String search = textFieldSearch.getText();
     if(search.equals("")){
       productionList = FXCollections.observableArrayList(db.getProductionInfo());
@@ -164,11 +184,16 @@ public class Controller implements Initializable {
       tbvProductionInfo.setItems(productionList);
     }
     textFieldSearch.clear();
+    }
+    else{
+      textFieldSearch.setText("You need to be logged in to view production records.");
+    }
   }
 
   public void handleLogout() {
     manager = false;
     loggedIn = false;
+    currentUserName = null;
     loginResult.setText("Logged Out!");
   }
 }

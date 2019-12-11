@@ -23,6 +23,7 @@ public class DatabaseManager {
     stmt.setInt(3, parseInt(insertValues[2]));
     stmt.setString(4, insertValues[3]);
     stmt.setString(5, insertValues[4]);
+    stmt.setString(6,insertValues[5]);
     stmt.executeUpdate();
   }
 
@@ -32,6 +33,23 @@ public class DatabaseManager {
     stmt.setString(2, insertValues[1]);
     stmt.setString(3, insertValues[2]);
     stmt.executeUpdate();
+  }
+
+  public void insertTest(String productName,String userName) throws SQLException {
+    java.sql.Timestamp currentTimestamp =
+            new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+    String query = "SELECT ID FROM PRODUCT WHERE NAME = ?";
+    PreparedStatement stmt = con.prepareStatement(query);
+    stmt.setString(1,productName);
+    rs = stmt.executeQuery();
+    rs.next();
+    int productID = rs.getInt("ID");
+    String query2 = "INSERT INTO TESTING(TESTTIME,TESTERUSERNAME,PRODUCTID) VALUES(?,?,?)";
+    PreparedStatement stmt2 = con.prepareStatement(query2);
+    stmt2.setTimestamp(1,currentTimestamp);
+    stmt2.setString(2,userName);
+    stmt2.setInt(3,productID);
+    stmt2.execute();
   }
 
   public void insertProduction(String iQuery, String[] insertValues) throws SQLException {
