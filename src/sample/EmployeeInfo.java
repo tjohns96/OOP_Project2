@@ -5,7 +5,6 @@ import java.sql.SQLException;
 public class EmployeeInfo {
   private StringBuilder name;
   private String code;
-  private int suffixNum;
   private String deptID;
   private DatabaseManager db = new DatabaseManager();
 
@@ -14,22 +13,21 @@ public class EmployeeInfo {
   public String getCode() {
     return code;
   }
-  public String getDeptId(){
+
+  public String getDeptId() {
     return "Production";
   }
-  private void setDeptId(String deptID){
+
+  private void setDeptId(String deptID) {
     this.deptID = deptID;
   }
-  private String getId(){
+
+  private String getId() {
     return deptID;
   }
-  private boolean validId(String id){
-    if(id.equals("Production")){
-      return true;
-    }
-    else{
-      return false;
-    }
+
+  private boolean validId(String id) {
+    return id.equals("Production");
   }
 
   public StringBuilder getName() {
@@ -37,7 +35,7 @@ public class EmployeeInfo {
   }
 
   public String createUserName(String fName, String lName) throws SQLException {
-    suffixNum = 0;
+    int suffixNum = 0;
     StringBuilder newUserName = new StringBuilder(lName);
     newUserName.insert(0, fName.substring(0, 1));
     int counter = 0;

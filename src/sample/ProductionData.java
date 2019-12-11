@@ -67,18 +67,37 @@ public class ProductionData {
   private String manufacturer;
   private String type;
 
-  public ProductionData(int productionID, Date manufacturedOn, int numMade, int totalMade, String prodName, String manufacturer, String type) {
+  public ProductionData(
+      int productionID,
+      Date manufacturedOn,
+      int numMade,
+      int totalMade,
+      String prodName,
+      String manufacturer,
+      String type) {
     this.productionID = productionID;
     this.numMade = numMade;
     this.totalMade = totalMade;
     this.manufacturedOn = manufacturedOn;
-      this.prodName = prodName;
-      this.type = type;
-      this.manufacturer = manufacturer;
+    this.prodName = prodName;
+    this.type = type;
+    this.manufacturer = manufacturer;
   }
 
-    @Override
-    public String toString() {
-        return(productionID+" "+ manufacturedOn+" " + numMade+" " + totalMade+" " + prodName+" " + manufacturer+" " + type);
-    }
+  @Override
+  public String toString() {
+    return (productionID
+        + " "
+        + manufacturedOn
+        + " "
+        + numMade
+        + " "
+        + totalMade
+        + " "
+        + prodName
+        + " "
+        + manufacturer
+        + " "
+        + type);
+  }
 }

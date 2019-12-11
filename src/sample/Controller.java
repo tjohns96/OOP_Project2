@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-import javax.xml.soap.Text;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -39,7 +38,6 @@ public class Controller implements Initializable {
   @FXML private TextArea textAreaTestResults;
 
   private ObservableList<ProductionData> productionList;
-  private int currentUser;
   private boolean manager = false;
   private boolean loggedIn = false;
   private String currentUserName;
@@ -57,7 +55,7 @@ public class Controller implements Initializable {
   public void recordButtonPress() throws SQLException {
     String productName = productComboBox.getValue().toString();
     String amount = prodAmount.getText();
-    if (loggedIn == true) {
+    if (loggedIn) {
       production.insertProduction(
           amount,
           Integer.toString(db.selectTotalMade(productName, Integer.parseInt(amount))),
@@ -96,7 +94,7 @@ public class Controller implements Initializable {
     if (db.checkCredentials(userName, password)) {
       loggedIn = true;
       loginResult.setText("Logged in!");
-      currentUser = db.setCurrentUser(userName);
+      int currentUser = db.setCurrentUser(userName);
       manager = db.checkManager(currentUser);
       textFieldUserName.clear();
       textFieldPassword.clear();
@@ -110,7 +108,7 @@ public class Controller implements Initializable {
 
   @FXML
   public void handleAddProduct() throws SQLException {
-    if (manager == true) {
+    if (manager) {
       String productType = typeComboBox.getValue().toString();
       productType = productType.toUpperCase();
       productType = ItemType.valueOf(productType).getCode();
@@ -129,22 +127,22 @@ public class Controller implements Initializable {
       textAreaAddProduct.setText("Must be logged in as a manager to add products.");
     }
   }
+
   @FXML
   public void handleTest() throws SQLException {
-    if(loggedIn == true){
-    String productName = productComboBox1.getValue().toString();
-    db.insertTest(productName, currentUserName);
-    textAreaTestResults.setText("Test Recorded!");
-    productComboBox1.getSelectionModel().clearSelection();
-    }
-    else{
+    if (loggedIn) {
+      String productName = productComboBox1.getValue().toString();
+      db.insertTest(productName, currentUserName);
+      textAreaTestResults.setText("Test Recorded!");
+      productComboBox1.getSelectionModel().clearSelection();
+    } else {
       textAreaTestResults.setText("You need to be logged in to record testing.");
     }
   }
 
   @FXML
   public void handleAddEmployee() throws SQLException {
-    if (manager == true) {
+    if (manager) {
       String fName = textFieldFirstName.getText().trim();
       String lName = textFieldLastName.getText().trim();
       String password = textFieldAddPassword.getText();
@@ -158,34 +156,32 @@ public class Controller implements Initializable {
       }
       String sql =
           "INSERT INTO EMPLOYEE(FIRSTNAME,LASTNAME,MANAGER,USERNAME,PASSWORD,DEPTID) VALUES (?,?,?,?,?,?)";
-      String[] insert = {fName, lName, Integer.toString(isManager), userName, password,department};
+      String[] insert = {fName, lName, Integer.toString(isManager), userName, password, department};
       db.insertEmployee(sql, insert);
       textFieldAddPassword.clear();
       textFieldFirstName.clear();
       textFieldLastName.clear();
       textAreaUserName.setText("Your new username is : " + userName);
-      checkBoxManager.setSelected(false);
     } else {
       textFieldAddPassword.clear();
       textFieldFirstName.clear();
       textFieldLastName.clear();
       textAreaUserName.setText("You have to be logged in as a manager to add employees.");
-      checkBoxManager.setSelected(false);
     }
+    checkBoxManager.setSelected(false);
   }
-  public void handleSearch(){
-    if(loggedIn == true){
-    String search = textFieldSearch.getText();
-    if(search.equals("")){
-      productionList = FXCollections.observableArrayList(db.getProductionInfo());
+
+  public void handleSearch() {
+    if (loggedIn) {
+      String search = textFieldSearch.getText();
+      if (search.equals("")) {
+        productionList = FXCollections.observableArrayList(db.getProductionInfo());
+      } else {
+        productionList = FXCollections.observableArrayList(db.getSearchResults(search));
+      }
       tbvProductionInfo.setItems(productionList);
+      textFieldSearch.clear();
     } else {
-      productionList = FXCollections.observableArrayList(db.getSearchResults(search));
-      tbvProductionInfo.setItems(productionList);
-    }
-    textFieldSearch.clear();
-    }
-    else{
       textFieldSearch.setText("You need to be logged in to view production records.");
     }
   }

@@ -23,21 +23,26 @@ This is my fxml file. It was built using SceneBuilder
 @since 9/22/2019
 -->
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+         prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <Tab text="Login">
         <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <children>
-                    <TextField fx:id="textFieldUserName" layoutX="226.0" layoutY="138.0" promptText="Username" />
-                    <TextField fx:id="textFieldPassword" layoutX="226.0" layoutY="196.0" promptText="Password" />
-                    <Button fx:id="buttonLogin" layoutX="226.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
+                    <TextField fx:id="textFieldUserName" layoutX="226.0" layoutY="138.0" promptText="Username"/>
+                    <TextField fx:id="textFieldPassword" layoutX="226.0" layoutY="196.0" promptText="Password"/>
+                    <Button fx:id="buttonLogin" layoutX="226.0" layoutY="264.0" mnemonicParsing="false"
+                            onAction="#handleLogin" text="Login"/>
                     <Text layoutX="224.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Screen">
                         <font>
-                            <Font size="27.0" />
+                            <Font size="27.0"/>
                         </font>
                     </Text>
-               <TextArea fx:id="loginResult" editable="false" layoutX="201.0" layoutY="312.0" prefHeight="0.0" prefWidth="200.0" />
-               <Button layoutX="323.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                    <TextArea fx:id="loginResult" editable="false" layoutX="201.0" layoutY="312.0" prefHeight="0.0"
+                              prefWidth="200.0"/>
+                    <Button layoutX="323.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLogout"
+                            text="Logout"/>
                 </children>
             </AnchorPane>
         </content>
@@ -45,112 +50,135 @@ This is my fxml file. It was built using SceneBuilder
     <Tab text="Add Employee">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
-                <TextField fx:id="textFieldFirstName" layoutX="78.0" layoutY="81.0" prefHeight="25.0" prefWidth="152.0" promptText="Employee First Name" />
-            <TextField fx:id="textFieldLastName" layoutX="82.0" layoutY="126.0" promptText="Employee Last Name" />
-            <TextField fx:id="textFieldAddPassword" layoutX="82.0" layoutY="175.0" promptText="Password" />
-            <CheckBox fx:id="checkBoxManager" layoutX="457.0" layoutY="190.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Manager" />
-            <Button layoutX="461.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleAddEmployee" text="Add" />
-            <TextArea fx:id="textAreaUserName" editable="false" layoutX="145.0" layoutY="300.0" prefHeight="38.0" prefWidth="311.0" />
-            <TextArea editable="false" layoutX="250.0" layoutY="201.0" prefHeight="38.0" prefWidth="184.0" text="Password must be 4 characters" />
-            <Text layoutX="209.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Employee" textAlignment="CENTER" wrappingWidth="182.13671875">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <TextField fx:id="textFieldDepartment" layoutX="82.0" layoutY="228.0" promptText="Department" />
+                <TextField fx:id="textFieldFirstName" layoutX="78.0" layoutY="81.0" prefHeight="25.0" prefWidth="152.0"
+                           promptText="Employee First Name"/>
+                <TextField fx:id="textFieldLastName" layoutX="82.0" layoutY="126.0" promptText="Employee Last Name"/>
+                <TextField fx:id="textFieldAddPassword" layoutX="82.0" layoutY="175.0" promptText="Password"/>
+                <CheckBox fx:id="checkBoxManager" layoutX="457.0" layoutY="190.0" mnemonicParsing="false"
+                          prefHeight="17.0" prefWidth="85.0" text="Manager"/>
+                <Button layoutX="461.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleAddEmployee"
+                        text="Add"/>
+                <TextArea fx:id="textAreaUserName" editable="false" layoutX="145.0" layoutY="300.0" prefHeight="38.0"
+                          prefWidth="311.0"/>
+                <TextArea editable="false" layoutX="250.0" layoutY="201.0" prefHeight="38.0" prefWidth="184.0"
+                          text="Password must be 4 characters"/>
+                <Text layoutX="209.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Employee"
+                      textAlignment="CENTER" wrappingWidth="182.13671875">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Text>
+                <TextField fx:id="textFieldDepartment" layoutX="82.0" layoutY="228.0" promptText="Department"/>
             </children>
         </AnchorPane>
     </Tab>
     <Tab text="Production and Testing">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
-            <ComboBox fx:id="productComboBox1" layoutX="422.0" layoutY="97.0" prefWidth="150.0" promptText="Product Tested" />
-                <Text layoutX="31.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Record Production and Testing" wrappingWidth="288.203125">
+                <ComboBox fx:id="productComboBox1" layoutX="422.0" layoutY="97.0" prefWidth="150.0"
+                          promptText="Product Tested"/>
+                <Text layoutX="31.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Record Production and Testing" wrappingWidth="288.203125">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Text>
-                <TextField fx:id="prodAmount" layoutX="30.0" layoutY="96.0" />
-                <Text layoutX="58.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Made" wrappingWidth="96.98307228088379" />
-                <ComboBox fx:id="productComboBox" layoutX="196.0" layoutY="97.0" prefWidth="150.0" promptText="Product Made" />
-                <Button fx:id="recordButton" layoutX="20.0" layoutY="232.0" mnemonicParsing="false" onAction="#recordButtonPress" text="Record Production" />
-            <TextArea fx:id="textAreaProductionResults" editable="false" layoutX="146.0" layoutY="177.0" prefHeight="131.0" prefWidth="209.0" />
-            <Line endX="29.0" endY="314.0" layoutX="347.0" layoutY="58.0" startX="29.0" startY="-58.0" />
-            <Button fx:id="buttonTesting" layoutX="447.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleTest" text="Record Testing" />
-            <TextArea fx:id="textAreaTestResults" layoutX="397.0" layoutY="289.0" prefHeight="23.0" prefWidth="200.0" />
+                <TextField fx:id="prodAmount" layoutX="30.0" layoutY="96.0"/>
+                <Text layoutX="58.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount Made"
+                      wrappingWidth="96.98307228088379"/>
+                <ComboBox fx:id="productComboBox" layoutX="196.0" layoutY="97.0" prefWidth="150.0"
+                          promptText="Product Made"/>
+                <Button fx:id="recordButton" layoutX="20.0" layoutY="232.0" mnemonicParsing="false"
+                        onAction="#recordButtonPress" text="Record Production"/>
+                <TextArea fx:id="textAreaProductionResults" editable="false" layoutX="146.0" layoutY="177.0"
+                          prefHeight="131.0" prefWidth="209.0"/>
+                <Line endX="29.0" endY="314.0" layoutX="347.0" layoutY="58.0" startX="29.0" startY="-58.0"/>
+                <Button fx:id="buttonTesting" layoutX="447.0" layoutY="232.0" mnemonicParsing="false"
+                        onAction="#handleTest" text="Record Testing"/>
+                <TextArea fx:id="textAreaTestResults" layoutX="397.0" layoutY="289.0" prefHeight="23.0"
+                          prefWidth="200.0"/>
             </children>
         </AnchorPane>
     </Tab>
     <Tab text="Add Product">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
-                <Text layoutX="183.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product" textAlignment="CENTER" wrappingWidth="233.13671875">
-               <font>
-                  <Font size="22.0" />
-               </font></Text>
-                <ComboBox fx:id="typeComboBox" layoutX="33.0" layoutY="98.0" prefWidth="150.0" promptText="Product Type" />
-            <TextField fx:id="textFieldManufacturer" layoutX="34.0" layoutY="186.0" promptText="Manufacturer" />
-            <TextField fx:id="textFieldProductName" layoutX="34.0" layoutY="267.0" promptText="Product name" />
-            <Button layoutX="416.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleAddProduct" text="Add Product" />
-            <TextArea fx:id="textAreaAddProduct" layoutX="362.0" layoutY="252.0" prefHeight="55.0" prefWidth="191.0" />
+                <Text layoutX="183.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product"
+                      textAlignment="CENTER" wrappingWidth="233.13671875">
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
+                </Text>
+                <ComboBox fx:id="typeComboBox" layoutX="33.0" layoutY="98.0" prefWidth="150.0"
+                          promptText="Product Type"/>
+                <TextField fx:id="textFieldManufacturer" layoutX="34.0" layoutY="186.0" promptText="Manufacturer"/>
+                <TextField fx:id="textFieldProductName" layoutX="34.0" layoutY="267.0" promptText="Product name"/>
+                <Button layoutX="416.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleAddProduct"
+                        text="Add Product"/>
+                <TextArea fx:id="textAreaAddProduct" layoutX="362.0" layoutY="252.0" prefHeight="55.0"
+                          prefWidth="191.0"/>
             </children>
         </AnchorPane>
     </Tab>
-   <Tab text="View Production">
-     <content>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <children>
-               <AnchorPane layoutY="124.0" prefHeight="247.0" prefWidth="600.0">
-                  <children>
-                     <ScrollPane prefHeight="247.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <content>
-                           <TableView fx:id="tbvProductionInfo" prefHeight="500.0" prefWidth="1050.0">
-                             <columns>
-                               <TableColumn prefWidth="150.0" text="Production ID">
-                                 <cellValueFactory>
-                                     <PropertyValueFactory property="productionID" />
-                                 </cellValueFactory>
-                               </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Made On">
-                                     <cellValueFactory>
-                                         <PropertyValueFactory property="manufacturedOn" />
-                                     </cellValueFactory>
-                                 </TableColumn>
-                               <TableColumn prefWidth="150.0" text="Number Made">
-                                   <cellValueFactory>
-                                       <PropertyValueFactory property="numMade" />
-                                   </cellValueFactory>
-                               </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Total Made">
-                                     <cellValueFactory>
-                                         <PropertyValueFactory property="totalMade" />
-                                     </cellValueFactory>
-                                 </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Manufacturer">
-                                     <cellValueFactory>
-                                         <PropertyValueFactory property="manufacturer" />
-                                     </cellValueFactory>
-                                 </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Product Name">
-                                     <cellValueFactory>
-                                         <PropertyValueFactory property="prodName" />
-                                     </cellValueFactory>
-                                 </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Type">
-                                     <cellValueFactory>
-                                         <PropertyValueFactory property="type" />
-                                     </cellValueFactory>
-                                 </TableColumn>
-                             </columns>
-                           </TableView>
-                        </content>
-                     </ScrollPane>
-                  </children>
-               </AnchorPane>
-               <TextField fx:id="textFieldSearch" layoutX="30.0" layoutY="61.0" prefHeight="25.0" prefWidth="323.0" />
-               <Button layoutX="397.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="22.0" prefWidth="77.0" text="Search" />
-            </children>
-         </AnchorPane>
-     </content>
-   </Tab>
+    <Tab text="View Production">
+        <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <children>
+                    <AnchorPane layoutY="124.0" prefHeight="247.0" prefWidth="600.0">
+                        <children>
+                            <ScrollPane prefHeight="247.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0"
+                                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                        AnchorPane.topAnchor="0.0">
+                                <content>
+                                    <TableView fx:id="tbvProductionInfo" prefHeight="500.0" prefWidth="1050.0">
+                                        <columns>
+                                            <TableColumn prefWidth="150.0" text="Production ID">
+                                                <cellValueFactory>
+                                                    <PropertyValueFactory property="productionID"/>
+                                                </cellValueFactory>
+                                            </TableColumn>
+                                            <TableColumn prefWidth="150.0" text="Made On">
+                                                <cellValueFactory>
+                                                    <PropertyValueFactory property="manufacturedOn"/>
+                                                </cellValueFactory>
+                                            </TableColumn>
+                                            <TableColumn prefWidth="150.0" text="Number Made">
+                                                <cellValueFactory>
+                                                    <PropertyValueFactory property="numMade"/>
+                                                </cellValueFactory>
+                                            </TableColumn>
+                                            <TableColumn prefWidth="150.0" text="Total Made">
+                                                <cellValueFactory>
+                                                    <PropertyValueFactory property="totalMade"/>
+                                                </cellValueFactory>
+                                            </TableColumn>
+                                            <TableColumn prefWidth="150.0" text="Manufacturer">
+                                                <cellValueFactory>
+                                                    <PropertyValueFactory property="manufacturer"/>
+                                                </cellValueFactory>
+                                            </TableColumn>
+                                            <TableColumn prefWidth="150.0" text="Product Name">
+                                                <cellValueFactory>
+                                                    <PropertyValueFactory property="prodName"/>
+                                                </cellValueFactory>
+                                            </TableColumn>
+                                            <TableColumn prefWidth="150.0" text="Type">
+                                                <cellValueFactory>
+                                                    <PropertyValueFactory property="type"/>
+                                                </cellValueFactory>
+                                            </TableColumn>
+                                        </columns>
+                                    </TableView>
+                                </content>
+                            </ScrollPane>
+                        </children>
+                    </AnchorPane>
+                    <TextField fx:id="textFieldSearch" layoutX="30.0" layoutY="61.0" prefHeight="25.0"
+                               prefWidth="323.0"/>
+                    <Button layoutX="397.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleSearch"
+                            prefHeight="22.0" prefWidth="77.0" text="Search"/>
+                </children>
+            </AnchorPane>
+        </content>
+    </Tab>
 </TabPane>

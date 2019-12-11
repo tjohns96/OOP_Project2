@@ -11,7 +11,7 @@ public enum ItemType {
     return code;
   }
 
-  private ItemType(String newCode) {
+  ItemType(String newCode) {
     code = newCode;
   }
 }

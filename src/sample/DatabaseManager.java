@@ -23,7 +23,7 @@ public class DatabaseManager {
     stmt.setInt(3, parseInt(insertValues[2]));
     stmt.setString(4, insertValues[3]);
     stmt.setString(5, insertValues[4]);
-    stmt.setString(6,insertValues[5]);
+    stmt.setString(6, insertValues[5]);
     stmt.executeUpdate();
   }
 
@@ -35,20 +35,20 @@ public class DatabaseManager {
     stmt.executeUpdate();
   }
 
-  public void insertTest(String productName,String userName) throws SQLException {
+  public void insertTest(String productName, String userName) throws SQLException {
     java.sql.Timestamp currentTimestamp =
-            new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+        new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
     String query = "SELECT ID FROM PRODUCT WHERE NAME = ?";
     PreparedStatement stmt = con.prepareStatement(query);
-    stmt.setString(1,productName);
+    stmt.setString(1, productName);
     rs = stmt.executeQuery();
     rs.next();
     int productID = rs.getInt("ID");
     String query2 = "INSERT INTO TESTING(TESTTIME,TESTERUSERNAME,PRODUCTID) VALUES(?,?,?)";
     PreparedStatement stmt2 = con.prepareStatement(query2);
-    stmt2.setTimestamp(1,currentTimestamp);
-    stmt2.setString(2,userName);
-    stmt2.setInt(3,productID);
+    stmt2.setTimestamp(1, currentTimestamp);
+    stmt2.setString(2, userName);
+    stmt2.setInt(3, productID);
     stmt2.execute();
   }
 
@@ -90,8 +90,7 @@ public class DatabaseManager {
     PreparedStatement statement = con.prepareStatement(sqlStatement);
     statement.setString(1, newUserName);
     rs = statement.executeQuery();
-    boolean result = rs.next();
-    return result;
+    return rs.next();
   }
 
   public boolean checkManager(int currentUser) throws SQLException {
@@ -100,18 +99,16 @@ public class DatabaseManager {
     statement.setInt(1, currentUser);
     rs = statement.executeQuery();
     rs.next();
-    boolean result = rs.getBoolean(1);
-    return result;
+    return rs.getBoolean(1);
   }
 
   public int selectProductID(String product) {
     try {
-      PreparedStatement stmt =
-          con.prepareStatement("SELECT id FROM product WHERE NAME = '" + product + "';");
+      PreparedStatement stmt = con.prepareStatement("SELECT id FROM product WHERE NAME = ?");
+      stmt.setString(1,product);
       rs = stmt.executeQuery();
       rs.next();
-      int productID = rs.getInt(1);
-      return productID;
+      return rs.getInt(1);
     } catch (SQLException e) {
       sqlExceptionHandler(e);
       return 0;
@@ -124,11 +121,7 @@ public class DatabaseManager {
     stmt.setString(1, userName);
     stmt.setString(2, password);
     rs = stmt.executeQuery();
-    if (rs.next()) {
-      return true;
-    } else {
-      return false;
-    }
+    return rs.next();
   }
 
   public int setCurrentUser(String userName) throws SQLException {
@@ -225,8 +218,7 @@ public class DatabaseManager {
     prodName = results.getString("NAME");
     manufacturer = results.getString("MANUFACTURER");
     type = results.getString("TYPE");
-    String[] result = {prodName, manufacturer, type};
-    return result;
+    return new String[] {prodName, manufacturer, type};
   }
 
   public void sqlExceptionHandler(SQLException error) {
