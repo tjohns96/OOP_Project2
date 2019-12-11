@@ -1,10 +1,9 @@
 package sample;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -22,8 +21,8 @@ public class DatabaseManager {
     stmt.setString(1, insertValues[0]);
     stmt.setString(2, insertValues[1]);
     stmt.setInt(3, parseInt(insertValues[2]));
-    stmt.setString(4,insertValues[3]);
-    stmt.setString(5,insertValues[4]);
+    stmt.setString(4, insertValues[3]);
+    stmt.setString(5, insertValues[4]);
     stmt.executeUpdate();
   }
 
@@ -46,7 +45,6 @@ public class DatabaseManager {
     stmt.executeUpdate();
   }
 
-
   public int selectTotalMade(String product, int madeNow) {
 
     try {
@@ -55,8 +53,9 @@ public class DatabaseManager {
       rs = stmt.executeQuery();
       rs.next();
       int productID = rs.getInt(1);
-      PreparedStatement stmt2 = con.prepareStatement("SELECT MAX(TOTALMADE) FROM PRODUCTION WHERE PRODUCTID = ?");
-      stmt2.setInt(1,productID);
+      PreparedStatement stmt2 =
+          con.prepareStatement("SELECT MAX(TOTALMADE) FROM PRODUCTION WHERE PRODUCTID = ?");
+      stmt2.setInt(1, productID);
       rs = stmt2.executeQuery();
       rs.next();
       int totalMade = rs.getInt(1);
@@ -67,13 +66,14 @@ public class DatabaseManager {
       return 0;
     }
   }
+
   public boolean checkUserName(String newUserName) throws SQLException {
     sqlStatement = "SELECT USERNAME FROM employee WHERE USERNAME = ?";
     PreparedStatement statement = con.prepareStatement(sqlStatement);
     statement.setString(1, newUserName);
     rs = statement.executeQuery();
-     boolean result = rs.next();
-     return result;
+    boolean result = rs.next();
+    return result;
   }
 
   public boolean checkManager(int currentUser) throws SQLException {
@@ -128,6 +128,44 @@ public class DatabaseManager {
     } catch (SQLException e) {
       sqlExceptionHandler(e);
     }
+  }
+
+  public List<ProductionData> getProductionInfo() {
+    List<ProductionData> prodList = new ArrayList<>();
+    try {
+      String query = "SELECT * FROM PRODUCTION";
+      PreparedStatement stmt = con.prepareStatement(query);
+      rs = stmt.executeQuery();
+      while (rs.next()) {
+        int productionID = rs.getInt("PRODUCTIONID");
+        Date madeOn = rs.getDate("MANUFACTUREDON");
+        int numMade = rs.getInt("AMOUNTMADE");
+        int totalMade = rs.getInt("TOTALMADE");
+        int productID = rs.getInt("PRODUCTID");
+        String [] productInfo = getProductInfo(productID);
+        prodList.add(new ProductionData(productionID, madeOn, numMade, totalMade, productInfo[0], productInfo[1], productInfo[2]));
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return prodList;
+  }
+
+  public String[] getProductInfo(int productID) throws SQLException {
+    String query = "SELECT * FROM PRODUCT WHERE ID = ?";
+    PreparedStatement stmt = con.prepareStatement(query);
+    stmt.setInt(1, productID);
+    ResultSet results;
+    results = stmt.executeQuery();
+    String prodName;
+    String type;
+    String manufacturer;
+    results.next();
+    prodName = results.getString("NAME");
+    manufacturer = results.getString("MANUFACTURER");
+    type = results.getString("TYPE");
+    String[] result = {prodName, manufacturer, type};
+    return result;
   }
 
   public void sqlExceptionHandler(SQLException error) {

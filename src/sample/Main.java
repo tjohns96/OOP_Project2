@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,8 +27,11 @@ public class Main extends Application {
     System.out.println(screen.toString());
     MoviePlayer moviePlayer = new MoviePlayer("1440p", 60, 2, MonitorType.LED);
     System.out.println(moviePlayer.toString());
-    System.out.println( db.checkManager(1));
     EmployeeInfo eInfo = new EmployeeInfo();
+    ObservableList<ProductionData> productionData = FXCollections.observableArrayList(db.getProductionInfo());
+    for(ProductionData s:productionData){
+      System.out.println(s);
+    }
     launch(args);
     db.closeCon();
   }

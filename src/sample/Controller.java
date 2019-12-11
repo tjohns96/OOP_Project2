@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -30,7 +32,9 @@ public class Controller implements Initializable {
   @FXML private TextField textFieldManufacturer;
   @FXML private TextField textFieldProductName;
   @FXML private TextArea textAreaAddProduct;
+  @FXML private TableView<ProductionData> tbvProductionInfo;
 
+  private ObservableList<ProductionData> productionList;
   private int currentUser;
   private boolean manager = false;
   private boolean loggedIn = false;
@@ -38,10 +42,13 @@ public class Controller implements Initializable {
   public Controller() throws SQLException {
     con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
   }
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     typeComboBox.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
     setTypeComboBox();
+    productionList = FXCollections.observableArrayList(db.getProductionInfo());
+    tbvProductionInfo.setItems(productionList);
   }
 
   public void recordButtonPress() throws SQLException {
@@ -108,8 +115,7 @@ public class Controller implements Initializable {
       typeComboBox.getSelectionModel().clearSelection();
       textAreaAddProduct.setText("Product Added!");
       productComboBox.getItems().add(name);
-    }
-    else{
+    } else {
       textAreaAddProduct.setText("Must be logged in as a manager to add products.");
     }
   }

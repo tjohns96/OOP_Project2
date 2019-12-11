@@ -31,9 +31,13 @@ public class AudioPlayer extends Product implements MultimediaControl {
   public void next() {
     System.out.println("Playing next track.");
   }
-  @Override
-    public String toString(){
-      return(super.toString()+ "\nAudio Spec: " + audioSpecification + "\nMedia type: " + mediaType);
 
+  @Override
+  public String toString() {
+    return (super.toString()
+        + "\nAudio Spec: "
+        + audioSpecification
+        + "\nMedia type: "
+        + mediaType);
   }
 }

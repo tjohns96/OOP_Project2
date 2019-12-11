@@ -1,5 +1,3 @@
 package sample;
 
-public class DeptID {
-
-}
+public class DeptID {}
