@@ -1,5 +1,8 @@
 package sample;
 
+/**
+ * A class to model screens
+ */
 public class Screen implements ScreenSpec {
   private String resolution;
   private int refreshRate;
@@ -18,11 +21,20 @@ public class Screen implements ScreenSpec {
 
   private int responseTime;
 
+  /**
+   * A default constructor
+   */
   public Screen() {
     resolution = "0p";
     refreshRate = 0;
   }
 
+  /**
+   * A constructor with args for all fields
+   * @param resolution
+   * @param refreshRate
+   * @param responseTime
+   */
   public Screen(String resolution, int refreshRate, int responseTime) {
     this.resolution = resolution;
     this.refreshRate = refreshRate;
@@ -44,6 +56,10 @@ public class Screen implements ScreenSpec {
     return responseTime;
   }
 
+  /**
+   * Allows you to print info about the screens
+   * @return
+   */
   @Override
   public String toString() {
     return ("Resolution: "

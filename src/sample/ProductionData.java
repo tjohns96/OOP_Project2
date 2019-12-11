@@ -2,7 +2,19 @@ package sample;
 
 import java.util.Date;
 
+/**
+ * This class is to model the tableview that shows production
+ */
 public class ProductionData {
+
+
+  private int productionID;
+  private Date manufacturedOn;
+  private int numMade;
+  private int totalMade;
+  private String prodName;
+  private String manufacturer;
+  private String type;
   public int getProductionID() {
     return productionID;
   }
@@ -59,14 +71,16 @@ public class ProductionData {
     this.type = type;
   }
 
-  private int productionID;
-  private Date manufacturedOn;
-  private int numMade;
-  private int totalMade;
-  private String prodName;
-  private String manufacturer;
-  private String type;
-
+  /**
+   * A constructor with self explanatory parameters
+   * @param productionID
+   * @param manufacturedOn
+   * @param numMade
+   * @param totalMade
+   * @param prodName
+   * @param manufacturer
+   * @param type
+   */
   public ProductionData(
       int productionID,
       Date manufacturedOn,
@@ -84,6 +98,10 @@ public class ProductionData {
     this.manufacturer = manufacturer;
   }
 
+  /**
+   * This allows me to print the results, making sure it works
+   * @return A String with all fields in space separated strings
+   */
   @Override
   public String toString() {
     return (productionID

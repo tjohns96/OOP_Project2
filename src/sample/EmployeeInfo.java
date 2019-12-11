@@ -2,6 +2,9 @@ package sample;
 
 import java.sql.SQLException;
 
+/**
+ * Sets the employee's username to be unique, plus other stuff for the assignment
+ */
 public class EmployeeInfo {
   private StringBuilder name;
   private String code;
@@ -34,6 +37,13 @@ public class EmployeeInfo {
     return name;
   }
 
+  /**
+   * The only actual method in this class. Makes the username unique by incrementing a suffix until it is unique
+   * @param fName The employee first name
+   * @param lName The employee last name
+   * @return The new user name in the form of the first initial+last name + suffix
+   * @throws SQLException
+   */
   public String createUserName(String fName, String lName) throws SQLException {
     int suffixNum = 0;
     StringBuilder newUserName = new StringBuilder(lName);

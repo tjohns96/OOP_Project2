@@ -1,5 +1,8 @@
 package sample;
 
+/**
+ * An interface for products
+ */
 public interface Item {
   int getId();
 

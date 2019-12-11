@@ -42,16 +42,29 @@ public class Controller implements Initializable {
   private boolean loggedIn = false;
   private String currentUserName;
 
+  /**
+   * The constructor that initializes the DriverManager
+   * @throws SQLException
+   */
   public Controller() throws SQLException {
     con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
   }
 
+  /**
+   * Sets all of the comboboxes to have appropriate values
+   * @param url
+   * @param rb
+   */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     typeComboBox.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
     setTypeComboBox();
   }
 
+  /**
+   * Records any production based on user input in the GUI
+   * @throws SQLException
+   */
   public void recordButtonPress() throws SQLException {
     String productName = productComboBox.getValue().toString();
     String amount = prodAmount.getText();
@@ -71,6 +84,9 @@ public class Controller implements Initializable {
     }
   }
 
+  /**
+   * Sets the comboboxes with all of the products currently in the database
+   */
   public void setTypeComboBox() {
     ResultSet rs = null;
     try {
@@ -87,6 +103,10 @@ public class Controller implements Initializable {
     }
   }
 
+  /**
+   * Logs a user in if they have correct credentials
+   * @throws SQLException
+   */
   @FXML
   public void handleLogin() throws SQLException {
     String userName = textFieldUserName.getText();
@@ -106,6 +126,10 @@ public class Controller implements Initializable {
     }
   }
 
+  /**
+   * Adds a product into database and updates comboboxes
+   * @throws SQLException
+   */
   @FXML
   public void handleAddProduct() throws SQLException {
     if (manager) {
@@ -128,6 +152,10 @@ public class Controller implements Initializable {
     }
   }
 
+  /**
+   * Updates the test database
+   * @throws SQLException
+   */
   @FXML
   public void handleTest() throws SQLException {
     if (loggedIn) {
@@ -140,6 +168,10 @@ public class Controller implements Initializable {
     }
   }
 
+  /**
+   * Adds employees if a manager is logged in
+   * @throws SQLException
+   */
   @FXML
   public void handleAddEmployee() throws SQLException {
     if (manager) {
@@ -171,6 +203,9 @@ public class Controller implements Initializable {
     checkBoxManager.setSelected(false);
   }
 
+  /**
+   * searches production logs based on user input in gui
+   */
   public void handleSearch() {
     if (loggedIn) {
       String search = textFieldSearch.getText();
@@ -186,6 +221,9 @@ public class Controller implements Initializable {
     }
   }
 
+  /**
+   * logs the user out
+   */
   public void handleLogout() {
     manager = false;
     loggedIn = false;

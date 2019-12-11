@@ -1,9 +1,19 @@
 package sample;
 
+/**
+ * A class to simulate a movieplayer unnecessary besides the assignment
+ */
 public class MoviePlayer extends Product implements MultimediaControl {
   private Screen screen = new Screen();
   private MonitorType monitorType;
 
+  /**
+   * A constructor for a movie player
+   * @param resolution Sets res
+   * @param refreshRate Sets hz
+   * @param responseTime Sets ms
+   * @param mType Sets monitor type, from the enum MonitorType
+   */
   public MoviePlayer(String resolution, int refreshRate, int responseTime, MonitorType mType) {
     screen.setResolution(resolution);
     screen.setRefreshRate(refreshRate);

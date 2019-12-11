@@ -1,15 +1,25 @@
 package sample;
 
+/**
+ * Abstract class for all products
+ */
 abstract class Product implements Item {
   private int id;
   private ItemType type;
   private String manufacturer;
   private String name;
 
+  /**
+   * A constructor to set the name
+   * @param newName Sets the name of the product
+   */
   public Product(String newName) {
     name = newName;
   }
 
+  /**
+   * default no argument constructor does nothing
+   */
   public Product() {
     id = 0;
     type = null;
@@ -27,6 +37,10 @@ abstract class Product implements Item {
     name = newName;
   }
 
+  /**
+   * Gives an enum values based on the String argument
+   * @param type A string with what type you want
+   */
   public void setType(String type) {
     switch (type) {
       case "Visual":
