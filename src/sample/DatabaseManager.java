@@ -142,8 +142,51 @@ public class DatabaseManager {
         int numMade = rs.getInt("AMOUNTMADE");
         int totalMade = rs.getInt("TOTALMADE");
         int productID = rs.getInt("PRODUCTID");
-        String [] productInfo = getProductInfo(productID);
-        prodList.add(new ProductionData(productionID, madeOn, numMade, totalMade, productInfo[0], productInfo[1], productInfo[2]));
+        String[] productInfo = getProductInfo(productID);
+        prodList.add(
+            new ProductionData(
+                productionID,
+                madeOn,
+                numMade,
+                totalMade,
+                productInfo[0],
+                productInfo[1],
+                productInfo[2]));
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return prodList;
+  }
+
+  public List<ProductionData> getSearchResults(String searchQuery) {
+    List<ProductionData> prodList = new ArrayList<>();
+    try {
+      String query = "SELECT * FROM PRODUCT WHERE NAME = ? OR MANUFACTURER = ? OR TYPE =?";
+      PreparedStatement stmt = con.prepareStatement(query);
+      stmt.setString(1, searchQuery);
+      stmt.setString(2, searchQuery);
+      stmt.setString(3, searchQuery);
+      rs = stmt.executeQuery();
+      while (rs.next()) {
+        int productID = rs.getInt("ID");
+        String name = rs.getString("NAME");
+        String manufacturer = rs.getString("MANUFACTURER");
+        String type = rs.getString("TYPE");
+        query = "SELECT * FROM PRODUCTION WHERE PRODUCTID = ?";
+        ResultSet result;
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setInt(1, productID);
+        result = statement.executeQuery();
+        while (result.next()) {
+          int productionID = result.getInt("PRODUCTIONID");
+          Date madeOn = result.getDate("MANUFACTUREDON");
+          int numMade = result.getInt("AMOUNTMADE");
+          int totalMade = result.getInt("TOTALMADE");
+          prodList.add(
+              new ProductionData(
+                  productionID, madeOn, numMade, totalMade, name, manufacturer, type));
+        }
       }
     } catch (SQLException ex) {
       ex.printStackTrace();

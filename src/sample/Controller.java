@@ -32,6 +32,7 @@ public class Controller implements Initializable {
   @FXML private TextField textFieldManufacturer;
   @FXML private TextField textFieldProductName;
   @FXML private TextArea textAreaAddProduct;
+  @FXML private TextField textFieldSearch;
   @FXML private TableView<ProductionData> tbvProductionInfo;
 
   private ObservableList<ProductionData> productionList;
@@ -47,8 +48,7 @@ public class Controller implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {
     typeComboBox.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
     setTypeComboBox();
-    productionList = FXCollections.observableArrayList(db.getProductionInfo());
-    tbvProductionInfo.setItems(productionList);
+
   }
 
   public void recordButtonPress() throws SQLException {
@@ -63,6 +63,8 @@ public class Controller implements Initializable {
       prodAmount.clear();
       productComboBox.getSelectionModel().clearSelection();
       productComboBox.setValue(null);
+      productionList = FXCollections.observableArrayList(db.getProductionInfo());
+      tbvProductionInfo.setItems(productionList);
     } else {
       textAreaProductionResults.setText("You must be logged in to record production.");
     }
@@ -94,6 +96,8 @@ public class Controller implements Initializable {
       manager = db.checkManager(currentUser);
       textFieldUserName.clear();
       textFieldPassword.clear();
+      productionList = FXCollections.observableArrayList(db.getProductionInfo());
+      tbvProductionInfo.setItems(productionList);
     } else {
       loginResult.setText("Username or password incorrect");
     }
@@ -149,6 +153,17 @@ public class Controller implements Initializable {
       textAreaUserName.setText("You have to be logged in as a manager to add employees.");
       checkBoxManager.setSelected(false);
     }
+  }
+  public void handleSearch(){
+    String search = textFieldSearch.getText();
+    if(search.equals("")){
+      productionList = FXCollections.observableArrayList(db.getProductionInfo());
+      tbvProductionInfo.setItems(productionList);
+    } else {
+      productionList = FXCollections.observableArrayList(db.getSearchResults(search));
+      tbvProductionInfo.setItems(productionList);
+    }
+    textFieldSearch.clear();
   }
 
   public void handleLogout() {

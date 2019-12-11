@@ -10,10 +10,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <!--
 This is my fxml file. It was built using SceneBuilder
@@ -21,7 +21,6 @@ This is my fxml file. It was built using SceneBuilder
 @version 1.0
 @since 9/22/2019
 -->
-
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <Tab text="Login">
@@ -103,37 +102,37 @@ This is my fxml file. It was built using SceneBuilder
                              <columns>
                                <TableColumn prefWidth="150.0" text="Production ID">
                                  <cellValueFactory>
-                                     <PropertyValueFactory property="productionID"/>
+                                     <PropertyValueFactory property="productionID" />
                                  </cellValueFactory>
                                </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Made On" >
+                                 <TableColumn prefWidth="150.0" text="Made On">
                                      <cellValueFactory>
-                                         <PropertyValueFactory property="manufacturedOn"/>
+                                         <PropertyValueFactory property="manufacturedOn" />
                                      </cellValueFactory>
                                  </TableColumn>
-                               <TableColumn prefWidth="150.0" text="Number Made" >
+                               <TableColumn prefWidth="150.0" text="Number Made">
                                    <cellValueFactory>
-                                       <PropertyValueFactory property="numMade"/>
+                                       <PropertyValueFactory property="numMade" />
                                    </cellValueFactory>
                                </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Total Made" >
+                                 <TableColumn prefWidth="150.0" text="Total Made">
                                      <cellValueFactory>
-                                         <PropertyValueFactory property="totalMade"/>
+                                         <PropertyValueFactory property="totalMade" />
                                      </cellValueFactory>
                                  </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Product Name" >
+                                 <TableColumn prefWidth="150.0" text="Product Name">
                                      <cellValueFactory>
-                                         <PropertyValueFactory property="prodName"/>
+                                         <PropertyValueFactory property="prodName" />
                                      </cellValueFactory>
                                  </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Manufacturer" >
+                                 <TableColumn prefWidth="150.0" text="Manufacturer">
                                      <cellValueFactory>
-                                         <PropertyValueFactory property="manufacturer"/>
+                                         <PropertyValueFactory property="manufacturer" />
                                      </cellValueFactory>
                                  </TableColumn>
-                                 <TableColumn prefWidth="150.0" text="Type" >
+                                 <TableColumn prefWidth="150.0" text="Type">
                                      <cellValueFactory>
-                                         <PropertyValueFactory property="type"/>
+                                         <PropertyValueFactory property="type" />
                                      </cellValueFactory>
                                  </TableColumn>
                              </columns>
@@ -142,8 +141,8 @@ This is my fxml file. It was built using SceneBuilder
                      </ScrollPane>
                   </children>
                </AnchorPane>
-               <TextField layoutX="151.0" layoutY="61.0" prefHeight="25.0" prefWidth="202.0" />
-               <Button layoutX="397.0" layoutY="63.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="77.0" text="Search" />
+               <TextField fx:id="textFieldSearch" layoutX="151.0" layoutY="61.0" prefHeight="25.0" prefWidth="202.0" />
+               <Button layoutX="397.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="22.0" prefWidth="77.0" text="Search" />
             </children>
          </AnchorPane>
      </content>
