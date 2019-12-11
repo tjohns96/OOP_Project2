@@ -3,8 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -47,6 +50,11 @@ This is my fxml file. It was built using SceneBuilder
             <Button layoutX="461.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleAddEmployee" text="Add" />
             <TextArea fx:id="textAreaUserName" editable="false" layoutX="145.0" layoutY="300.0" prefHeight="38.0" prefWidth="311.0" />
             <TextArea editable="false" layoutX="250.0" layoutY="201.0" prefHeight="38.0" prefWidth="184.0" text="Password must be 4 characters" />
+            <Text layoutX="209.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Employee" textAlignment="CENTER" wrappingWidth="182.13671875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
             </children>
         </AnchorPane>
     </Tab>
@@ -76,9 +84,37 @@ This is my fxml file. It was built using SceneBuilder
                 <ComboBox fx:id="typeComboBox" layoutX="33.0" layoutY="98.0" prefWidth="150.0" promptText="Product Type" />
             <TextField fx:id="textFieldManufacturer" layoutX="34.0" layoutY="186.0" promptText="Manufacturer" />
             <TextField fx:id="textFieldProductName" layoutX="34.0" layoutY="267.0" promptText="Product name" />
-            <Button layoutX="416.0" layoutY="186.0" mnemonicParsing="false" text="Add Product" />
+            <Button layoutX="416.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleAddProduct" text="Add Product" />
             <TextArea fx:id="textAreaAddProduct" layoutX="362.0" layoutY="252.0" prefHeight="55.0" prefWidth="191.0" />
             </children>
         </AnchorPane>
     </Tab>
+   <Tab text="View Production">
+     <content>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+               <AnchorPane layoutY="124.0" prefHeight="247.0" prefWidth="600.0">
+                  <children>
+                     <ScrollPane prefHeight="247.0" prefWidth="600.0">
+                        <content>
+                           <TableView prefHeight="247.0" prefWidth="600.0">
+                             <columns>
+                               <TableColumn prefWidth="100.0" text="Production ID" />
+                               <TableColumn prefWidth="100.0" text="Number Made" />
+                                 <TableColumn prefWidth="100.0" text="Total Made" />
+                                 <TableColumn prefWidth="100.0" text="Product Name" />
+                                 <TableColumn prefWidth="100.0" text="Manufacturer" />
+                                 <TableColumn prefWidth="100.0" text="Product Type" />
+                             </columns>
+                           </TableView>
+                        </content>
+                     </ScrollPane>
+                  </children>
+               </AnchorPane>
+               <TextField layoutX="151.0" layoutY="61.0" prefHeight="25.0" prefWidth="202.0" />
+               <Button layoutX="397.0" layoutY="63.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="77.0" text="Search" />
+            </children>
+         </AnchorPane>
+     </content>
+   </Tab>
 </TabPane>

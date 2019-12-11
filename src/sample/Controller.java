@@ -27,6 +27,9 @@ public class Controller implements Initializable {
   @FXML private CheckBox checkBoxManager;
   @FXML private TextArea textAreaUserName;
   @FXML private TextArea textAreaProductionResults;
+  @FXML private TextField textFieldManufacturer;
+  @FXML private TextField textFieldProductName;
+  @FXML private TextArea textAreaAddProduct;
 
   private int currentUser;
   private boolean manager = false;
@@ -34,6 +37,11 @@ public class Controller implements Initializable {
 
   public Controller() throws SQLException {
     con = DriverManager.getConnection("jdbc:h2:./res/ProductDB");
+  }
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
+    typeComboBox.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
+    setTypeComboBox();
   }
 
   public void recordButtonPress() throws SQLException {
@@ -48,8 +56,7 @@ public class Controller implements Initializable {
       prodAmount.clear();
       productComboBox.getSelectionModel().clearSelection();
       productComboBox.setValue(null);
-    }
-    else{
+    } else {
       textAreaProductionResults.setText("You must be logged in to record production.");
     }
   }
@@ -69,12 +76,6 @@ public class Controller implements Initializable {
     }
   }
 
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
-    typeComboBox.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
-    setTypeComboBox();
-  }
-
   @FXML
   public void handleLogin() throws SQLException {
     String userName = textFieldUserName.getText();
@@ -88,6 +89,28 @@ public class Controller implements Initializable {
       textFieldPassword.clear();
     } else {
       loginResult.setText("Username or password incorrect");
+    }
+  }
+
+  @FXML
+  public void handleAddProduct() throws SQLException {
+    if (manager == true) {
+      String productType = typeComboBox.getValue().toString();
+      productType = productType.toUpperCase();
+      productType = ItemType.valueOf(productType).getCode();
+      String manufacturer = textFieldManufacturer.getText();
+      String name = textFieldProductName.getText();
+      String[] insertValues = {productType, manufacturer, name};
+      String query = "INSERT INTO PRODUCT(TYPE, MANUFACTURER, NAME) VALUES(?,?,?)";
+      db.insertProduct(query, insertValues);
+      textFieldManufacturer.clear();
+      textFieldProductName.clear();
+      typeComboBox.getSelectionModel().clearSelection();
+      textAreaAddProduct.setText("Product Added!");
+      productComboBox.getItems().add(name);
+    }
+    else{
+      textAreaAddProduct.setText("Must be logged in as a manager to add products.");
     }
   }
 

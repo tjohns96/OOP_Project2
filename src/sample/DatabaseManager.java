@@ -29,10 +29,9 @@ public class DatabaseManager {
 
   public void insertProduct(String iQuery, String[] insertValues) throws SQLException {
     PreparedStatement stmt = con.prepareStatement(iQuery);
-    stmt.setInt(1, parseInt(insertValues[0]));
+    stmt.setString(1, insertValues[0]);
     stmt.setString(2, insertValues[1]);
     stmt.setString(3, insertValues[2]);
-    stmt.setString(4, insertValues[3]);
     stmt.executeUpdate();
   }
 
